@@ -76,13 +76,17 @@ const quickActions = [
 function Dashboard() {
   return (
     <div className="px-2 bg-gray-50 h-dvh">
-      <div>
-        <h1>Welcome back, Dr,Sarah Johnson</h1>
-        <p>Here's a snapshot of your hospital training network.</p>
+      <div className="bg-linear-to-r from-teal-500 to-blue-600 rounded-2xl p-6 mb-6">
+        <h1 className="text-white text-2xl font-semibold">
+          Welcome back, Dr,Sarah Johnson
+        </h1>
+        <p className="text-white text-sm mt-1">
+          Here's a snapshot of your hospital training network.
+        </p>
       </div>
-      <div className="mt-1">
-        <p className="">Key Statistics</p>
-        <div className="flex gap-4">
+      <div className="mt-1 mb-6">
+        <h2 className="text-lg font-semibold mb-4">Key Statistics</h2>
+        <div className="grid grid-cols-5 gap-4">
           <StatBox
             title="Total Hospital Branches"
             stat={15}
@@ -94,29 +98,35 @@ function Dashboard() {
           <StatBox title="Upcoming Sessions" stat={18} icon={scheduleLogo} />
         </div>
       </div>
-      <div className="flex gap-1.5 mt-5">
-        <div className="border rounded-2xl border-borderOutline p-5">
-          <div className="flex justify-between">
-            <div className="flex">
-              <img src={bell} alt="" />
-              <p>Recent Notifications</p>
+      {/* Notifications and Quick Actions */}
+      <div className="grid grid-cols-3 gap-6 mt-5">
+        <div className="col-span-2 border rounded-2xl border-borderOutline p-5">
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex items-center gap-2">
+              <img src={bell} alt="bell" className="w-5 h-5" />
+              <p className="font-semibold">Recent Notifications</p>
             </div>
             <p className="bg-teal-100 text-teal-800 font-semibold p-1 rounded-xl text-sm">
               5 New
             </p>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 mb-4">
             <Notifications data={notifications} />
           </div>
+          <div className="flex justify-center pt-2">
+            <button className="text-gray-700 hover:text-gray-900 font-medium text-sm px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+              View All Notifications
+            </button>
+          </div>
         </div>
-        <div className="border rounded-2xl border-borderOutline p-4">
+        <div className="col-span-1 border rounded-2xl border-borderOutline p-4">
           <p>Quick Actions</p>
           <div className="flex flex-col gap-2">
             <QuickAction data={quickActions} />
           </div>
         </div>
       </div>
-      <div className="flex gap-10">
+      <div className="grid grid-cols-3 gap-6">
         <DashboardBasicInformation
           title="Recent Enrollments"
           data={enrollmentData}
