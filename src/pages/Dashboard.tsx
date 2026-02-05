@@ -1,17 +1,17 @@
 import StatBox from "../components/StatBox";
 import DashboardBasicInformation from "../components/DashboardBasicInformation";
+import Notifications from "../components/Notifications";
+import QuickAction from "../components/QuickAction";
 
 //icons
 
-import bell from "../assets/Bell.svg";
-import hospitalLogo from "../assets/medical-kit_2400690.png";
-import courseLogo from "../assets/BookFilled.png";
-import traineesLogo from "../assets/BookOutlined.png";
-import userLogo from "../assets/UserOutlined.png";
-import scheduleLogo from "../assets/gear_10450744.png";
-import plus from "../assets/Plus.svg";
-import Notifications from "../components/Notifications";
-import QuickAction from "../components/QuickAction";
+import Bell from "../assets/Bell.svg?react";
+import HospitalLogo from "../assets/hospital.svg?react";
+import CourseLogo from "../assets/BookFilled.svg?react";
+import TraineesLogo from "../assets/BookOutlined.svg?react";
+import UserLogo from "../assets/UserOutlined.svg?react";
+import ScheduleLogo from "../assets/schedule.svg?react";
+import Plus from "../assets/Plus.svg?react";
 
 const enrollmentData = [
   { label: "Advanced Cardiology", value: "+5" },
@@ -34,27 +34,27 @@ const branchPerformance = [
 const notifications = [
   {
     notification: "Course 'Advanced Cardiology' starts in 2 days",
-    icon: courseLogo,
+    Icon: CourseLogo,
     time: "2 hours ago",
   },
   {
     notification: "New trainee added to 'Chicago Branch'",
-    icon: plus,
+    Icon: Plus,
     time: "4 hours ago",
   },
   {
     notification: "Training session 'Emergency Medicine' completed",
-    icon: plus,
+    Icon: Plus,
     time: "6 hours ago",
   },
   {
     notification: "Trainer Dr. Ahmed assigned to 'Pediatric Care'",
-    icon: userLogo,
+    Icon: UserLogo,
     time: "1 day ago",
   },
   {
     notification: "Branch 'Austin Medical Center' updated capacity",
-    icon: scheduleLogo,
+    Icon: ScheduleLogo,
     time: "2 days ago",
   },
 ];
@@ -63,13 +63,13 @@ const quickActions = [
   {
     label: "Add New Branch",
     description: "Register a new hospital branch",
-    icon: hospitalLogo,
+    Icon: HospitalLogo,
   },
-  { label: "Add New Course", description: "Add new course", icon: courseLogo },
+  { label: "Add New Course", description: "Add new course", Icon: CourseLogo },
   {
     label: "Schedule Training session",
     description: "Setup new training center",
-    icon: scheduleLogo,
+    Icon: ScheduleLogo,
   },
 ];
 
@@ -90,12 +90,33 @@ function Dashboard() {
           <StatBox
             title="Total Hospital Branches"
             stat={15}
-            icon={hospitalLogo}
+            Icon={HospitalLogo}
+            iconbg="bg-blue-500"
           />
-          <StatBox title="Active Courses" stat={24} icon={courseLogo} />
-          <StatBox title="Enrolled Trainees" stat={247} icon={traineesLogo} />
-          <StatBox title="Active Trainers" stat={42} icon={userLogo} />
-          <StatBox title="Upcoming Sessions" stat={18} icon={scheduleLogo} />
+          <StatBox
+            title="Active Courses"
+            stat={24}
+            Icon={CourseLogo}
+            iconbg="bg-green-500"
+          />
+          <StatBox
+            title="Enrolled Trainees"
+            stat={247}
+            Icon={TraineesLogo}
+            iconbg="bg-purple-500"
+          />
+          <StatBox
+            title="Active Trainers"
+            stat={42}
+            Icon={UserLogo}
+            iconbg="bg-teal-500"
+          />
+          <StatBox
+            title="Upcoming Sessions"
+            stat={18}
+            Icon={ScheduleLogo}
+            iconbg="bg-orange-500"
+          />
         </div>
       </div>
       {/* Notifications and Quick Actions */}
@@ -103,7 +124,7 @@ function Dashboard() {
         <div className="col-span-2 border rounded-2xl border-borderOutline p-5">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center gap-2">
-              <img src={bell} alt="bell" className="w-5 h-5" />
+              <Bell className="w-5 h-5" />
               <p className="font-semibold">Recent Notifications</p>
             </div>
             <p className="bg-teal-100 text-teal-800 font-semibold p-1 rounded-xl text-sm">
@@ -119,9 +140,9 @@ function Dashboard() {
             </button>
           </div>
         </div>
-        <div className="col-span-1 border rounded-2xl border-borderOutline p-4">
-          <p>Quick Actions</p>
-          <div className="flex flex-col gap-2">
+        <div className="col-span-1 border rounded-2xl border-borderOutline bg-white p-5">
+          <p className="font-semibold mb-4">Quick Actions</p>
+          <div className="flex flex-col gap-3">
             <QuickAction data={quickActions} />
           </div>
         </div>

@@ -1,14 +1,24 @@
-function QuickAction({ data }) {
+interface QuickAction {
+  label: string;
+  description: string;
+  Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+}
+
+interface QuickActionProps {
+  data: QuickAction[];
+}
+
+function QuickAction({ data }: QuickActionProps) {
   return (
     <>
       {data.map((item) => (
-        <div className="flex p-2 gap-1 border border-borderOutline rounded-2xl ">
-          <div className="flex items-center">
-            <img src={item.icon} alt="" className="h-6 w-6 object-contain" />
+        <div className="flex items-start p-3 gap-3 border border-borderOutline rounded-xl hover:border-teal-400 hover:bg-teal-50 transition-all cursor-pointer grou ">
+          <div className="flex items-center justify-center mt-0.5">
+            <item.Icon className="h-6 w-6 object-contain" />
           </div>
-          <div className="flex flex-col text-sm">
-            <p className="font-semibold">{item.label}</p>
-            <p className="text-charcoal">{item.description}</p>
+          <div className="flex flex-col">
+            <p className="font-semibold  text-sm">{item.label}</p>
+            <p className="text-charcoal text-xs mt-0.5">{item.description}</p>
           </div>
         </div>
       ))}

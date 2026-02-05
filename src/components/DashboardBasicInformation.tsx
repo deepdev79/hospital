@@ -15,13 +15,15 @@ function DashboardBasicInformation({
   textStyle,
 }: DashboardBasicInformation) {
   return (
-    <div className="border rounded-2xl p-5 mt-2">
-      <p className="font-semibold text-2xl mb-4">{title}</p>
-      <div className="">
-        {data.map((item) => (
-          <div className="flex justify-between gap-2 mb-2">
-            <p>{item.label}</p>
-            <p className={`${textStyle} font-semibold p-0.5 rounded`}>
+    <div className="border border-borderOutline rounded-2xl p-6 bg-white mt-2">
+      <p className="font-semibold text-lg mb-5">{title}</p>
+      <div className="space-y-3">
+        {data.map((item, index) => (
+          <div key={index} className="flex justify-between gap-3">
+            <p className="text-gray-700 text-sm">{item.label}</p>
+            <p
+              className={`${textStyle} font-semibold p-0.5 rounded-md text-sm whitespace-nowrap`}
+            >
               {item.value}
             </p>
           </div>

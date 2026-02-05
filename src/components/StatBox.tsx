@@ -1,18 +1,19 @@
 interface StatBox {
   title: string;
   stat: number;
-  icon: string;
+  Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  iconbg: string;
 }
 
-function StatBox({ icon, title, stat }: StatBox) {
+function StatBox({ Icon, title, stat, iconbg }: StatBox) {
   return (
-    <div className="flex border rounded-2xl p-5 gap-2 bg-white">
-      <div className="text-charcoal text-sm">
-        <p>{title}</p>
-        <p className="text-black font-semibold">{stat}</p>
+    <div className="flex items-center justify-between border border-borderOutline rounded-xl p-4 bg-white">
+      <div className=" text-sm">
+        <p className="text-charcoal mb-1">{title}</p>
+        <p className="text-black text-2xl">{stat}</p>
       </div>
-      <div className="flex items-center">
-        <img src={icon} alt="" className="h-6 w-6 object-contain" />
+      <div className={`${iconbg} flex items-center rounded-md ml-2 p-2`}>
+        <Icon className="h-6 w-6 object-contain" />
       </div>
     </div>
   );
