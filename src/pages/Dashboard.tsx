@@ -7,10 +7,10 @@ import QuickAction from "../components/QuickAction";
 
 import Bell from "../assets/Bell.svg?react";
 import HospitalLogo from "../assets/hospital.svg?react";
-import CourseLogo from "../assets/BookFilled.svg?react";
+import CourseLogo from "../assets/course.svg?react";
 import TraineesLogo from "../assets/BookOutlined.svg?react";
 import UserLogo from "../assets/UserOutlined.svg?react";
-import ScheduleLogo from "../assets/schedule.svg?react";
+import ScheduleLogo from "../assets/ScheduleOutlined.svg?react";
 import Plus from "../assets/Plus.svg?react";
 
 const enrollmentData = [
@@ -91,31 +91,36 @@ function Dashboard() {
             title="Total Hospital Branches"
             stat={15}
             Icon={HospitalLogo}
-            iconbg="bg-blue-500"
+            iconbg="bg-blue-300"
+            iconLines="fill-blue-700"
           />
           <StatBox
             title="Active Courses"
             stat={24}
             Icon={CourseLogo}
-            iconbg="bg-green-500"
+            iconbg="bg-green-300"
+            iconLines="fill-green-700"
           />
           <StatBox
             title="Enrolled Trainees"
             stat={247}
             Icon={TraineesLogo}
-            iconbg="bg-purple-500"
+            iconbg="bg-purple-300"
+            iconLines="fill-purple-700"
           />
           <StatBox
             title="Active Trainers"
             stat={42}
             Icon={UserLogo}
-            iconbg="bg-teal-500"
+            iconbg="bg-teal-300"
+            iconLines="fill-teal-700"
           />
           <StatBox
             title="Upcoming Sessions"
             stat={18}
             Icon={ScheduleLogo}
-            iconbg="bg-orange-500"
+            iconbg="bg-orange-300"
+            iconLines="fill-orange-700"
           />
         </div>
       </div>
@@ -124,7 +129,7 @@ function Dashboard() {
         <div className="col-span-2 border rounded-2xl border-borderOutline p-5">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center gap-2">
-              <Bell className="w-5 h-5" />
+              <Bell className="w-5 h-5 stroke-yellow-400 fill-white" />
               <p className="font-semibold">Recent Notifications</p>
             </div>
             <p className="bg-teal-100 text-teal-800 font-semibold p-1 rounded-xl text-sm">

@@ -3,8 +3,8 @@ import home from "../assets/house.svg";
 import hBranch from "../assets/hospital.svg";
 import traineesLogo from "../assets/BookOutlined.svg";
 import trainersLogo from "../assets/UserOutlined.svg";
-import scheduleLogo from "../assets/schedule.svg";
-import courses from "../assets/BookFilled.svg";
+import scheduleLogo from "../assets/ScheduleOutlined.svg";
+import courses from "../assets/course.svg";
 
 const navItems = [
   { name: "Dashboard", path: "/dashboard", icon: home },
