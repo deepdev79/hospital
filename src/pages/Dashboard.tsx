@@ -11,7 +11,7 @@ import CourseLogo from "../assets/course.svg?react";
 import TraineesLogo from "../assets/BookOutlined.svg?react";
 import UserLogo from "../assets/UserOutlined.svg?react";
 import ScheduleLogo from "../assets/ScheduleOutlined.svg?react";
-import Plus from "../assets/Plus.svg?react";
+import Plus from "../assets/PlusOutlined.svg?react";
 
 const enrollmentData = [
   { label: "Advanced Cardiology", value: "+5" },
@@ -36,26 +36,31 @@ const notifications = [
     notification: "Course 'Advanced Cardiology' starts in 2 days",
     Icon: CourseLogo,
     time: "2 hours ago",
+    iconLine: "fill-orange-500",
   },
   {
     notification: "New trainee added to 'Chicago Branch'",
     Icon: Plus,
     time: "4 hours ago",
+    iconLine: "fill-green-500",
   },
   {
     notification: "Training session 'Emergency Medicine' completed",
     Icon: Plus,
     time: "6 hours ago",
+    iconLine: "fill-blue-500",
   },
   {
     notification: "Trainer Dr. Ahmed assigned to 'Pediatric Care'",
     Icon: UserLogo,
     time: "1 day ago",
+    iconLine: "fill-purple-500",
   },
   {
     notification: "Branch 'Austin Medical Center' updated capacity",
     Icon: ScheduleLogo,
     time: "2 days ago",
+    iconLine: "fill-amber-500",
   },
 ];
 
@@ -73,9 +78,47 @@ const quickActions = [
   },
 ];
 
+const keyStatistics = [
+  {
+    title: "Total Hospital Branches",
+    stat: 15,
+    Icon: HospitalLogo,
+    iconBg: "bg-blue-100",
+    iconLines: "fill-blue-700",
+  },
+  {
+    title: "Active Courses",
+    stat: 24,
+    Icon: CourseLogo,
+    iconBg: "bg-green-100",
+    iconLines: "fill-green-700",
+  },
+  {
+    title: "Enrolled Trainees",
+    stat: 247,
+    Icon: TraineesLogo,
+    iconBg: "bg-purple-100",
+    iconLines: "fill-purple-700",
+  },
+  {
+    title: "Active Trainers",
+    stat: 42,
+    Icon: UserLogo,
+    iconBg: "bg-teal-100",
+    iconLines: "fill-teal-700",
+  },
+  {
+    title: "Upcoming Sessions",
+    stat: 18,
+    Icon: ScheduleLogo,
+    iconBg: "bg-orange-100",
+    iconLines: "fill-orange-700",
+  },
+];
+
 function Dashboard() {
   return (
-    <div className="px-2 bg-gray-50 h-dvh">
+    <div className="px-2 bg-gray-50 min-h-dvh">
       <div className="bg-linear-to-r from-teal-500 to-blue-600 rounded-2xl p-6 mb-6">
         <h1 className="text-white text-2xl font-semibold">
           Welcome back, Dr,Sarah Johnson
@@ -86,43 +129,7 @@ function Dashboard() {
       </div>
       <div className="mt-1 mb-6">
         <h2 className="text-lg font-semibold mb-4">Key Statistics</h2>
-        <div className="grid grid-cols-5 gap-4">
-          <StatBox
-            title="Total Hospital Branches"
-            stat={15}
-            Icon={HospitalLogo}
-            iconbg="bg-blue-300"
-            iconLines="fill-blue-700"
-          />
-          <StatBox
-            title="Active Courses"
-            stat={24}
-            Icon={CourseLogo}
-            iconbg="bg-green-300"
-            iconLines="fill-green-700"
-          />
-          <StatBox
-            title="Enrolled Trainees"
-            stat={247}
-            Icon={TraineesLogo}
-            iconbg="bg-purple-300"
-            iconLines="fill-purple-700"
-          />
-          <StatBox
-            title="Active Trainers"
-            stat={42}
-            Icon={UserLogo}
-            iconbg="bg-teal-300"
-            iconLines="fill-teal-700"
-          />
-          <StatBox
-            title="Upcoming Sessions"
-            stat={18}
-            Icon={ScheduleLogo}
-            iconbg="bg-orange-300"
-            iconLines="fill-orange-700"
-          />
-        </div>
+        <StatBox data={keyStatistics} />
       </div>
       {/* Notifications and Quick Actions */}
       <div className="grid grid-cols-3 gap-6 mt-5">
@@ -132,7 +139,7 @@ function Dashboard() {
               <Bell className="w-5 h-5 stroke-yellow-400 fill-white" />
               <p className="font-semibold">Recent Notifications</p>
             </div>
-            <p className="bg-teal-100 text-teal-800 font-semibold p-1 rounded-xl text-sm">
+            <p className="bg-teal-100 text-teal-800 font-semibold px-2 py-1 rounded-xl text-sm">
               5 New
             </p>
           </div>
@@ -146,9 +153,13 @@ function Dashboard() {
           </div>
         </div>
         <div className="col-span-1 border rounded-2xl border-borderOutline bg-white p-5">
-          <p className="font-semibold mb-4">Quick Actions</p>
+          <p className=" mb-4">Quick Actions</p>
           <div className="flex flex-col gap-3">
-            <QuickAction data={quickActions} />
+            <QuickAction
+              data={quickActions}
+              iconBg="bg-teal-100"
+              iconLines="fill-teal-700"
+            />
           </div>
         </div>
       </div>

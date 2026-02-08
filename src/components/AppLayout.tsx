@@ -5,7 +5,7 @@ import logo from "../assets/layout-dashboard.svg";
 function AppLayout() {
   return (
     <>
-      <div className="flex justify-between border-y border-gray-300 py-2 px-5">
+      <div className="sticky top-0 z-50 flex justify-between border-y bg-white h-16 border-gray-300 py-2 px-5">
         <div className="flex gap-3 items-stretch">
           <div className="flex items-center">
             <img

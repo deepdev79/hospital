@@ -22,7 +22,7 @@ function DashboardBasicInformation({
           <div key={index} className="flex justify-between gap-3">
             <p className="text-gray-700 text-sm">{item.label}</p>
             <p
-              className={`${textStyle} font-semibold p-0.5 rounded-md text-sm whitespace-nowrap`}
+              className={`${textStyle} font-semibold px-2  py-1 rounded-md text-xs whitespace-nowrap`}
             >
               {item.value}
             </p>

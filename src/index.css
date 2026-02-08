@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
+@layer base {
+  html {
+    font-size: 14px;
+  }
+}
+
 @theme {
   --color-charcoal: #333333;
   --color-borderOutline: #e5e7eb;
+
+  --font-sans:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
 }

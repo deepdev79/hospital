@@ -17,9 +17,9 @@ const navItems = [
 
 function Home() {
   return (
-    <div className=" grid grid-cols-6">
+    <div className=" grid grid-cols-6 min-h-screen">
       <div className="col-span-1">
-        <div className=" flex flex-col gap-4 border-r h-dvh border-borderOutline">
+        <div className="sticky top-16 h-[calc(100vh-64px)] flex flex-col gap-4 border-r border-borderOutline">
           {navItems.map((item) => (
             <NavLink
               key={item.path}
