@@ -1,6 +1,6 @@
 interface StatBox {
   title: string;
-  stat: number;
+  stat: number | string;
   Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   iconLines: string;
   iconBg?: string;

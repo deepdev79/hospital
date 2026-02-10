@@ -1,45 +1,50 @@
-import bookLogo from "../assets/BookOutlined.svg?react";
-import clock from "../assets/ClockCircleOutlined.svg?react";
-import userLogo from "../assets/UserOutlined.svg?react";
-import star from "../assets/Star.svg?react";
+import BookLogo from "../assets/BookOutlined.svg?react";
+import Clock from "../assets/ClockCircleOutlined.svg?react";
+import UserLogo from "../assets/UserOutlined.svg?react";
+import Star from "../assets/Star.svg?react";
+import StatBox from "../components/StatBox";
 
 const medicalTrainingCourses = [
   {
-    title: "Total Branches",
+    title: "Total Trainees",
     stat: 4,
     subPara: "Available  programs",
-    subParaTextBg: "text-blue-600",
-    Icon: bookLogo,
+    subParaBg: "text-blue-600",
+    Icon: BookLogo,
     iconLines: "fill-green-700",
   },
   {
     title: "Active Courses",
     stat: 2,
     subPara: "Currently running",
-    subParaTextBg: "text-green-600",
-    Icon: clock,
+    subParaBg: "text-green-600",
+    Icon: Clock,
     iconLines: "fill-green-500",
   },
   {
     title: "Total Enrollments",
     stat: 90,
     subPara: "Across all courses",
-    subParaTextBg: "text-purple-600",
-    Icon: userLogo,
+    subParaBg: "text-purple-600",
+    Icon: UserLogo,
     iconLines: "fill-purple-500",
   },
   {
     title: "Avg Rating",
     stat: 4.7,
     subPara: "Course satisfaction",
-    subParaTextBg: "text-orange-600",
-    Icon: star,
+    subParaBg: "text-orange-600",
+    Icon: Star,
     iconLines: "fill-orange-500",
   },
 ];
 
 function Courses() {
-  return <div>Courses</div>;
+  return (
+    <div>
+      <StatBox data={medicalTrainingCourses} />
+    </div>
+  );
 }
 
 export default Courses;

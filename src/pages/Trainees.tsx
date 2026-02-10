@@ -1,42 +1,51 @@
-import userLogo from "../assets/UserOutlined.svg?react";
+import UserLogo from "../assets/UserOutlined.svg?react";
+import BookIcon from "../assets/BookOutlined.svg?react";
+import BadgeIcon from "../assets/Badge.svg?react";
+import GraduateIcon from "../assets/Graduate.svg?react";
+import StatBox from "../components/StatBox";
+import CommonTable from "../components/CommonTable";
 
 const medicalTrainees = [
   {
     title: "Total Trainees",
     stat: 4,
     subPara: "Enrolled",
-    subParaTextBg: "text-blue-600",
-    Icon: userLogo,
+    subParaBg: "text-blue-600",
+    Icon: GraduateIcon,
     iconLines: "fill-green-500",
   },
   {
     title: "Active Training",
     stat: 2,
     subPara: "In progress",
-    subParaTextBg: "text-green-600",
-    Icon: userLogo,
+    subParaBg: "text-green-600",
+    Icon: UserLogo,
     iconLines: "fill-green-500",
   },
   {
     title: "Completed",
     stat: 1,
     subPara: "Graduated",
-    subParaTextBg: "text-blue-600",
-    Icon: userLogo,
+    subParaBg: "text-blue-600",
+    Icon: BadgeIcon,
     iconLines: "fill-green-500",
   },
   {
     title: "Average Progress",
     stat: 65,
     subPara: "Completion rate",
-    subParaTextBg: "text-green-600",
-    Icon: userLogo,
+    subParaBg: "text-green-600",
+    Icon: BookIcon,
     iconLines: "fill-green-500",
   },
 ];
 
 function Trainees() {
-  return <div>Trainees</div>;
+  return (
+    <div>
+      <StatBox data={medicalTrainees} />
+    </div>
+  );
 }
 
 export default Trainees;
