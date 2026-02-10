@@ -1,21 +1,30 @@
-interface tData {
+export interface tData {
   name: string;
-
   email: string;
   branch: string;
   course: string;
   modules: string;
   trainer: string;
   progress: string;
-  status: string;
+  status: "Active" | "Completed" | "Dropped";
 }
-
 interface CommonTableProp {
   title: string;
   data: tData[];
 }
 
+interface styles {
+  Active: string;
+  Completed: string;
+  Dropped: string;
+}
+
 function CommonTable({ title, data = [] }: CommonTableProp) {
+  const styles: styles = {
+    Active: "bg-green-300 text-green-900",
+    Completed: "bg-blue-300 text-blue-900",
+    Dropped: "bg-red-300 text-red-900",
+  };
   return (
     <div className="m-2 p-2 rounded-md border border-borderOutline">
       <h1>{title}</h1>
@@ -33,7 +42,10 @@ function CommonTable({ title, data = [] }: CommonTableProp) {
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index} className="border-b border-borderOutline">
+            <tr
+              key={index}
+              className="border-b border-borderOutline last:border-b-0"
+            >
               <td>
                 <p>{item.name}</p>
                 <p className="text-xs text-charcoal">{item.email}</p>
@@ -46,7 +58,9 @@ function CommonTable({ title, data = [] }: CommonTableProp) {
               <td>{item.trainer}</td>
               <td>{item.progress}</td>
               <td>
-                <p className="bg-green-300 text-green-700">{item.status}</p>
+                <p className={`${styles[item.status]} p-0.5 w-<25>`}>
+                  {item.status}
+                </p>
               </td>
               <td>
                 <p>ccc</p>

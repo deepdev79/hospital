@@ -3,6 +3,7 @@ import StarIcon from "../assets/Star.svg?react";
 import UserIcon from "../assets/UserOutlined.svg?react";
 import CommonTable from "../components/CommonTable";
 import StatBox from "../components/StatBox";
+import type { tData } from "../components/CommonTable";
 
 const medicalTrainers = [
   {
@@ -39,7 +40,7 @@ const medicalTrainers = [
   },
 ];
 
-const traineesDirectory = [
+const traineesDirectory: tData[] = [
   {
     name: "Dr.Aisha Khan",
     email: "aisha.khan@email.com",
