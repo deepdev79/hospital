@@ -1,8 +1,13 @@
 import BookIcon from "../assets/BookOutlined.svg?react";
 import StarIcon from "../assets/Star.svg?react";
 import UserIcon from "../assets/UserOutlined.svg?react";
+import PencilIcon from "../assets/Pencil.svg?react";
+import BasketIcon from "../assets/Basket.svg?react";
+import EyeIcon from "../assets/Eye.svg?react";
+
 import CommonTable from "../components/CommonTable";
 import StatBox from "../components/StatBox";
+
 import type { tData } from "../components/CommonTable";
 
 const medicalTrainers = [
@@ -82,12 +87,17 @@ const traineesDirectory: tData[] = [
     status: "Dropped",
   },
 ];
+const ActionIcons = [PencilIcon, BasketIcon, EyeIcon];
 
 function Trainers() {
   return (
     <div>
       <StatBox data={medicalTrainers} />
-      <CommonTable title="Trainee Directory" data={traineesDirectory} />
+      <CommonTable
+        title="Trainee Directory"
+        data={traineesDirectory}
+        icon={ActionIcons}
+      />
     </div>
   );
 }
