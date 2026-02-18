@@ -9,6 +9,13 @@ import CommonTable from "../components/CommonTable";
 import StatBox from "../components/StatBox";
 
 import type { tData } from "../components/CommonTable";
+import { useState } from "react";
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+} from "@tanstack/react-table";
+import Table from "../components/Table";
 
 const medicalTrainers = [
   {
@@ -89,7 +96,58 @@ const traineesDirectory: tData[] = [
 ];
 const ActionIcons = [PencilIcon, BasketIcon, EyeIcon];
 
+const columns = [
+  {
+    accessorKey: "name",
+    header: "Name",
+    cell: (props) => <p>{props.getValue()}</p>,
+  },
+  {
+    accessorKey: "email",
+    header: "Email",
+    cell: (props) => <p>{props.getValue()}</p>,
+  },
+  {
+    accessorKey: "branch",
+    header: "Branch",
+    cell: (props) => <p>{props.getValue()}</p>,
+  },
+  {
+    accessorKey: "course",
+    header: "Course",
+    cell: (props) => <p>{props.getValue()}</p>,
+  },
+  {
+    accessorKey: "modules",
+    header: "Module",
+    cell: (props) => <p>{props.getValue()}</p>,
+  },
+  {
+    accessorKey: "trainer",
+    header: "Trainer",
+    cell: (props) => <p>{props.getValue()}</p>,
+  },
+  {
+    accessorKey: "progress",
+    header: "Progress",
+    cell: (props) => <p>{props.getValue()}</p>,
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: (props) => <p>{props.getValue()}</p>,
+  },
+];
+
 function Trainers() {
+  const [data, setData] = useState<tData[]>(traineesDirectory);
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
+
   return (
     <div>
       <StatBox data={medicalTrainers} />
@@ -98,6 +156,33 @@ function Trainers() {
         data={traineesDirectory}
         icon={ActionIcons}
       />
+      <div className="mt-2">
+        <table>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id}>{header.column.columnDef.header}</th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="mt-2">
+        <Table tableData={traineesDirectory} />
+      </div>
     </div>
   );
 }
