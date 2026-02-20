@@ -3,8 +3,12 @@ interface styles {
   Completed: string;
   Dropped: string;
 }
+interface ProgressBarProps {
+  progress: string;
+  status: string;
+}
 
-function ProgressBar({ progress, status }) {
+function ProgressBar({ progress, status }: ProgressBarProps) {
   const progressBar: styles = {
     Active: "bg-blue-500",
     Completed: "bg-green-500",

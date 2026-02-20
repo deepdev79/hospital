@@ -5,49 +5,7 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 
-function Table({ tableData }) {
-  const columns = [
-    {
-      accessorKey: "name",
-      header: "Name",
-      cell: (props) => <p>{props.getValue()}</p>,
-    },
-    {
-      accessorKey: "email",
-      header: "Email",
-      cell: (props) => <p>{props.getValue()}</p>,
-    },
-    {
-      accessorKey: "branch",
-      header: "Branch",
-      cell: (props) => <p>{props.getValue()}</p>,
-    },
-    {
-      accessorKey: "course",
-      header: "Course",
-      cell: (props) => <p>{props.getValue()}</p>,
-    },
-    {
-      accessorKey: "modules",
-      header: "Module",
-      cell: (props) => <p>{props.getValue()}</p>,
-    },
-    {
-      accessorKey: "trainer",
-      header: "Trainer",
-      cell: (props) => <p>{props.getValue()}</p>,
-    },
-    {
-      accessorKey: "progress",
-      header: "Progress",
-      cell: (props) => <p>{props.getValue()}</p>,
-    },
-    {
-      accessorKey: "status",
-      header: "Status",
-      cell: (props) => <p>{props.getValue()}</p>,
-    },
-  ];
+function Table({ tableData, columns }) {
   const [data, setData] = useState(tableData);
 
   const table = useReactTable({

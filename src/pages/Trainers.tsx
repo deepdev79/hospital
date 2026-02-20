@@ -9,13 +9,10 @@ import CommonTable from "../components/CommonTable";
 import StatBox from "../components/StatBox";
 
 import type { tData } from "../components/CommonTable";
-import { useState } from "react";
-import {
-  useReactTable,
-  getCoreRowModel,
-  flexRender,
-} from "@tanstack/react-table";
+
 import Table from "../components/Table";
+import CellText from "../components/TableComponents/CellText";
+import ProgressBar from "../components/TableComponents/ProgressBar";
 
 const medicalTrainers = [
   {
@@ -95,59 +92,55 @@ const traineesDirectory: tData[] = [
   },
 ];
 const ActionIcons = [PencilIcon, BasketIcon, EyeIcon];
-
 const columns = [
   {
-    accessorKey: "name",
-    header: "Name",
-    cell: (props) => <p>{props.getValue()}</p>,
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-    cell: (props) => <p>{props.getValue()}</p>,
+    header: "Trainee",
+    accessorFn: (row) => ({ name: row.name, email: row.email }),
+    id: "traineeInfo",
+    cell: (info) => (
+      <CellText
+        primary={info.getValue().name}
+        secondary={info.getValue().email}
+      />
+    ),
   },
   {
     accessorKey: "branch",
     header: "Branch",
-    cell: (props) => <p>{props.getValue()}</p>,
+    cell: (info) => <p>{info.getValue()}</p>,
   },
   {
-    accessorKey: "course",
+    accessorFn: (row) => ({ course: row.course, modules: row.modules }),
     header: "Course",
-    cell: (props) => <p>{props.getValue()}</p>,
-  },
-  {
-    accessorKey: "modules",
-    header: "Module",
-    cell: (props) => <p>{props.getValue()}</p>,
+    cell: (info) => (
+      <CellText
+        primary={info.getValue().course}
+        secondary={info.getValue().modules}
+      />
+    ),
   },
   {
     accessorKey: "trainer",
     header: "Trainer",
-    cell: (props) => <p>{props.getValue()}</p>,
+    cell: (info) => <p>{info.getValue()}</p>,
   },
   {
-    accessorKey: "progress",
+    accessorFn: (row) => ({ progress: row.progress, status: row.status }),
     header: "Progress",
-    cell: (props) => <p>{props.getValue()}</p>,
+    cell: (info) => (
+      <ProgressBar
+        progress={info.getValue().progress}
+        status={info.getValue().status}
+      />
+    ),
   },
   {
     accessorKey: "status",
     header: "Status",
-    cell: (props) => <p>{props.getValue()}</p>,
+    cell: (info) => <p>{info.getValue()}</p>,
   },
 ];
-
 function Trainers() {
-  const [data, setData] = useState<tData[]>(traineesDirectory);
-
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
-
   return (
     <div>
       <StatBox data={medicalTrainers} />
@@ -157,31 +150,7 @@ function Trainers() {
         icon={ActionIcons}
       />
       <div className="mt-2">
-        <table>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id}>{header.column.columnDef.header}</th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="mt-2">
-        <Table tableData={traineesDirectory} />
+        <Table tableData={traineesDirectory} columns={columns} />
       </div>
     </div>
   );
