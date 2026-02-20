@@ -35,7 +35,7 @@ function CommonTable({ title, data = [], icon }: CommonTableProp) {
   return (
     <div className="m-2 p-2 rounded-md border border-borderOutline">
       <h1>{title}</h1>
-      <table className="border-collapse w-full ">
+      <table className="border-collapse w-full">
         <thead className="border-b border-borderOutline">
           <tr className="text-left">
             <th>Trainee</th>

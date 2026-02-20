@@ -4,15 +4,26 @@ import UserIcon from "../assets/UserOutlined.svg?react";
 import PencilIcon from "../assets/Pencil.svg?react";
 import BasketIcon from "../assets/Basket.svg?react";
 import EyeIcon from "../assets/Eye.svg?react";
+import Plus from "../assets/PlusOutlined.svg";
 
-import CommonTable from "../components/CommonTable";
 import StatBox from "../components/StatBox";
-
-import type { tData } from "../components/CommonTable";
 
 import Table from "../components/Table";
 import CellText from "../components/TableComponents/CellText";
 import ProgressBar from "../components/TableComponents/ProgressBar";
+import { createColumnHelper, type ColumnDef } from "@tanstack/react-table";
+import Status from "../components/TableComponents/Status";
+
+export interface tData {
+  name: string;
+  email: string;
+  branch: string;
+  course: string;
+  modules: string;
+  trainer: string;
+  progress: string;
+  status: "Active" | "Completed" | "Dropped";
+}
 
 const medicalTrainers = [
   {
@@ -92,66 +103,96 @@ const traineesDirectory: tData[] = [
   },
 ];
 const ActionIcons = [PencilIcon, BasketIcon, EyeIcon];
-const columns = [
-  {
-    header: "Trainee",
-    accessorFn: (row) => ({ name: row.name, email: row.email }),
+
+const columnHelper = createColumnHelper<tData>();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const columns: ColumnDef<tData, any>[] = [
+  columnHelper.accessor((row) => ({ name: row.name, email: row.email }), {
     id: "traineeInfo",
+    header: "Trainee",
     cell: (info) => (
       <CellText
         primary={info.getValue().name}
         secondary={info.getValue().email}
       />
     ),
-  },
-  {
-    accessorKey: "branch",
+  }),
+
+  columnHelper.accessor("branch", {
     header: "Branch",
-    cell: (info) => <p>{info.getValue()}</p>,
-  },
-  {
-    accessorFn: (row) => ({ course: row.course, modules: row.modules }),
-    header: "Course",
-    cell: (info) => (
-      <CellText
-        primary={info.getValue().course}
-        secondary={info.getValue().modules}
-      />
-    ),
-  },
-  {
-    accessorKey: "trainer",
+    cell: (info) => <p className="text-gray-600">{info.getValue()}</p>,
+  }),
+  columnHelper.accessor(
+    (row) => ({ course: row.course, modules: row.modules }),
+    {
+      id: "courseInfo",
+      header: "Course",
+      cell: (info) => (
+        <CellText
+          primary={info.getValue().course}
+          secondary={info.getValue().modules}
+        />
+      ),
+    },
+  ),
+
+  columnHelper.accessor("trainer", {
     header: "Trainer",
     cell: (info) => <p>{info.getValue()}</p>,
-  },
-  {
-    accessorFn: (row) => ({ progress: row.progress, status: row.status }),
-    header: "Progress",
-    cell: (info) => (
-      <ProgressBar
-        progress={info.getValue().progress}
-        status={info.getValue().status}
-      />
-    ),
-  },
-  {
-    accessorKey: "status",
+  }),
+
+  columnHelper.accessor(
+    (row) => ({ progress: row.progress, status: row.status }),
+    {
+      id: "progressStatus",
+      header: "Progress",
+      cell: (info) => (
+        <ProgressBar
+          progress={info.getValue().progress}
+          status={info.getValue().status}
+        />
+      ),
+    },
+  ),
+
+  columnHelper.accessor("status", {
     header: "Status",
-    cell: (info) => <p>{info.getValue()}</p>,
-  },
+    cell: (info) => <Status status={info.getValue()} />,
+  }),
+
+  columnHelper.display({
+    id: "actions",
+    header: "Actions",
+    cell: () => (
+      <div className="flex gap-2">
+        {ActionIcons.map((IconItem, i) => (
+          <IconItem key={i} className="w-5 h-5 cursor-pointer" />
+        ))}
+      </div>
+    ),
+  }),
 ];
 function Trainers() {
   return (
-    <div>
-      <StatBox data={medicalTrainers} />
-      <CommonTable
-        title="Trainee Directory"
-        data={traineesDirectory}
-        icon={ActionIcons}
-      />
-      <div className="mt-2">
-        <Table tableData={traineesDirectory} columns={columns} />
+    <div className="px-2 bg-gray-50 min-h-dvh">
+      <div className="flex justify-between px-2 py-9">
+        <div>
+          <h1 className="text-2xl">Medical Trainers</h1>
+          <p className="text-charcoal">
+            Manage professionals delivering medical training across your network
+          </p>
+        </div>
+        <button className="flex px-2 gap-2 items-center bg-teal-700 rounded-xl">
+          <img src={Plus} alt="plus" className="h-5 w-5" />
+          <p className="text-white font-medium text-sm ">Add Trainer</p>
+        </button>
       </div>
+      <StatBox data={medicalTrainers} />
+      <Table<tData>
+        title="Trainee Directory (4)"
+        tableData={traineesDirectory}
+        columns={columns}
+      />
     </div>
   );
 }
