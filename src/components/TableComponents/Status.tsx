@@ -1,22 +1,39 @@
-type StatusType = "Active" | "Completed" | "Dropped";
+type StatusType = "Active" | "Completed" | "Dropped" | "Pending" | "On Leave";
+
+type modeType = "Hybrid" | "On-site" | "Online" | "Part-time" | "Unavailable";
 
 interface statusProps {
-  status: StatusType;
+  input: StatusType | modeType | string;
 }
 
-const STATUS_STYLE: Record<StatusType, string> = {
-  Active: "bg-green-300 text-green-900",
-  Completed: "bg-blue-300 text-blue-900",
-  Dropped: "bg-red-300 text-red-900",
+const DARK_BLUE = "bg-blue-200 text-blue-900";
+const DARK_GREEN = "bg-green-200 text-green-900";
+const DARK_ORANGE = "bg-orange-200 text-orange-900";
+const DARK_PURPLE = "bg-purple-200 text-purple-900";
+const DARK_RED = "bg-red-200 text-red-900";
+const COMMON = "bg-blue-50 text-blue-700";
+
+const STATUS_STYLE: Record<StatusType | modeType, string> = {
+  Active: DARK_GREEN,
+  Completed: DARK_BLUE,
+  Dropped: DARK_RED,
+  "Part-time": DARK_PURPLE,
+  "On Leave": DARK_ORANGE,
+  Unavailable: DARK_RED,
+  Pending: DARK_ORANGE,
+  Hybrid: DARK_BLUE,
+  Online: DARK_GREEN,
+  "On-site": DARK_PURPLE,
 };
-function Status({ status }: statusProps) {
+function TextDecor({ input }: statusProps) {
+  const textStyle = STATUS_STYLE[input] || COMMON;
   return (
     <p
-      className={`${STATUS_STYLE[status]} w-3/5 p-0.5 rounded-md text-center text-xs font-semibold whitespace-nowrap overflow-hidden`}
+      className={`${textStyle} w-fit py-0.5 px-2 rounded-md text-center text-xs font-semibold whitespace-nowrap overflow-hidden`}
     >
-      {status}
+      {input}
     </p>
   );
 }
 
-export default Status;
+export default TextDecor;

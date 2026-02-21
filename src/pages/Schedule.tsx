@@ -3,6 +3,7 @@ import LocationIcon from "../assets/LocationOutline.svg?react";
 import UserIcon from "../assets/UserOutlined.svg?react";
 import ScheduleIcon from "../assets/ScheduleOutlined.svg?react";
 import StatBox from "../components/StatBox";
+import CommonHeading from "../components/CommonHeading";
 
 const trainingSchedule = [
   {
@@ -41,7 +42,12 @@ const trainingSchedule = [
 
 function Schedule() {
   return (
-    <div>
+    <div className="px-2 bg-gray-50 min-h-dvh">
+      <CommonHeading
+        title="Training Schedule"
+        summary="Manage sessions, trainer availability, and course timelines"
+        buttonText="Schedule Session"
+      />
       <StatBox data={trainingSchedule} />
     </div>
   );

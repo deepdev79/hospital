@@ -20,7 +20,7 @@ function Table<TData>({ title, tableData, columns }: TableProps<TData>) {
   });
 
   return (
-    <div className="m-2 p-2 rounded-xl border border-borderOutline bg-white">
+    <div className="mt-3 rounded-xl border border-borderOutline bg-white overflow-hidden">
       <h2 className="text-xl mt-5 mb-7 ml-3">{title}</h2>
       <table className="border-collapse w-full ml-3">
         <thead className="border-b border-borderOutline">

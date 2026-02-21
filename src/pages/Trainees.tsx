@@ -3,16 +3,14 @@ import BookIcon from "../assets/BookOutlined.svg?react";
 import BadgeIcon from "../assets/Badge.svg?react";
 import GraduateIcon from "../assets/Graduate.svg?react";
 import StatBox from "../components/StatBox";
-import BasketIcon from "../assets/Basket.svg?react";
-import EyeIcon from "../assets/Eye.svg?react";
-import Plus from "../assets/PlusOutlined.svg";
-import PencilIcon from "../assets/Pencil.svg?react";
 
 import Table from "../components/Table";
 import CellText from "../components/TableComponents/CellText";
+import CommonHeading from "../components/CommonHeading";
+import Actions from "../components/TableComponents/Actions";
 import ProgressBar from "../components/TableComponents/ProgressBar";
 import { createColumnHelper, type ColumnDef } from "@tanstack/react-table";
-import Status from "../components/TableComponents/Status";
+import TextDecor from "../components/TableComponents/Status";
 
 export interface tData {
   name: string;
@@ -48,7 +46,7 @@ const medicalTrainees = [
     subPara: "Graduated",
     subParaBg: "text-blue-600",
     Icon: BadgeIcon,
-    iconLines: "fill-green-500",
+    iconLines: "fill-blue-500",
   },
   {
     title: "Average Progress",
@@ -56,7 +54,7 @@ const medicalTrainees = [
     subPara: "Completion rate",
     subParaBg: "text-green-600",
     Icon: BookIcon,
-    iconLines: "fill-green-500",
+    iconLines: "fill-orange-500",
   },
 ];
 
@@ -102,7 +100,6 @@ const traineesDirectory: tData[] = [
     status: "Dropped",
   },
 ];
-const ActionIcons = [PencilIcon, BasketIcon, EyeIcon];
 
 const columnHelper = createColumnHelper<tData>();
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -157,37 +154,24 @@ const columns: ColumnDef<tData, any>[] = [
 
   columnHelper.accessor("status", {
     header: "Status",
-    cell: (info) => <Status status={info.getValue()} />,
+    cell: (info) => <TextDecor input={info.getValue()} />,
   }),
 
   columnHelper.display({
     id: "actions",
     header: "Actions",
-    cell: () => (
-      <div className="flex gap-2">
-        {ActionIcons.map((IconItem, i) => (
-          <IconItem key={i} className="w-5 h-5 cursor-pointer" />
-        ))}
-      </div>
-    ),
+    cell: () => <Actions />,
   }),
 ];
 
 function Trainees() {
   return (
     <div className="px-2 bg-gray-50 min-h-dvh">
-      <div className="flex justify-between px-2 py-9">
-        <div>
-          <h1 className="text-2xl">Medical Trainers</h1>
-          <p className="text-charcoal">
-            Manage professionals delivering medical training across your network
-          </p>
-        </div>
-        <button className="flex px-2 gap-2 items-center bg-teal-700 rounded-xl">
-          <img src={Plus} alt="plus" className="h-5 w-5" />
-          <p className="text-white font-medium text-sm ">Add Trainer</p>
-        </button>
-      </div>
+      <CommonHeading
+        title="Medical Trainees"
+        summary=" Manage professionals delivering medical training across your network"
+        buttonText="Add Trainee"
+      />
       <StatBox data={medicalTrainees} />
       <Table<tData>
         title="Trainee Directory (4)"

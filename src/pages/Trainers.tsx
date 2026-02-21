@@ -1,28 +1,26 @@
 import BookIcon from "../assets/BookOutlined.svg?react";
 import StarIcon from "../assets/Star.svg?react";
 import UserIcon from "../assets/UserOutlined.svg?react";
-import PencilIcon from "../assets/Pencil.svg?react";
-import BasketIcon from "../assets/Basket.svg?react";
-import EyeIcon from "../assets/Eye.svg?react";
-import Plus from "../assets/PlusOutlined.svg";
 
 import StatBox from "../components/StatBox";
 
 import Table from "../components/Table";
 import CellText from "../components/TableComponents/CellText";
-import ProgressBar from "../components/TableComponents/ProgressBar";
 import { createColumnHelper, type ColumnDef } from "@tanstack/react-table";
-import Status from "../components/TableComponents/Status";
+import Actions from "../components/TableComponents/Actions";
+import TextDecor from "../components/TableComponents/Status";
+import CommonHeading from "../components/CommonHeading";
+import Rating from "../components/TableComponents/Rating";
 
-export interface tData {
+export interface tFData {
   name: string;
-  email: string;
+  experience: number;
   branch: string;
-  course: string;
-  modules: string;
-  trainer: string;
-  progress: string;
-  status: "Active" | "Completed" | "Dropped";
+  specialty: string;
+  courses: string[];
+  trainees: number;
+  rating: number;
+  status: string[];
 }
 
 const medicalTrainers = [
@@ -60,137 +58,127 @@ const medicalTrainers = [
   },
 ];
 
-const traineesDirectory: tData[] = [
+const trainingFaculty: tFData[] = [
   {
-    name: "Dr.Aisha Khan",
-    email: "aisha.khan@email.com",
+    name: "Dr.Lebron James",
+    experience: 12,
+    specialty: "Cardiology",
     branch: "Downtown Medical Center",
-    course: "Advanced Cardiology",
-    modules: "6/8 modules",
-    trainer: "Dr. Lebron James",
-    progress: "75%",
-    status: "Active",
+    courses: ["Advanced Cardiology", "Basic ECG Reading"],
+    trainees: 45,
+    rating: 4.8,
+    status: ["Active", "Full-time"],
   },
   {
-    name: "Dr.John smith",
-    email: "john.smith@email.com",
+    name: "Dr.Steph Curry",
+    experience: 9,
+    specialty: "Emergency Medicine",
     branch: "City General Hospital",
-    course: "Emergency Medicine",
-    modules: "4/8 modules",
-    trainer: "Dr. Steph Curry",
-    progress: "60%",
-    status: "Active",
+    courses: ["Emergency Medicine", "Trauma Care"],
+    trainees: 32,
+    rating: 4.6,
+    status: ["Active", "Part-time"],
   },
   {
-    name: "Dr.James Cameron",
-    email: "james.cameron@email.com",
-    branch: "Capital Health center",
-    course: "Pediatric care",
-    modules: "5/7 modules",
-    trainer: "Dr. Leo Messi",
-    progress: "100%",
-    status: "Completed",
+    name: "Dr.Leo Messi",
+    experience: 15,
+    specialty: "Pediatrics",
+    branch: "Capital Health Center",
+    courses: ["Pediatric Care", "Child Development"],
+    trainees: 38,
+    rating: 4.9,
+    status: ["Active", "Full-time"],
   },
   {
-    name: "Dr.Tony stark",
-    email: "tony.stark@email.com",
+    name: "Dr.Neymar",
+    experience: 7,
+    specialty: "Surgery",
     branch: "Regional Medical Complex",
-    course: "Basic surgery",
-    modules: "2/7 modules",
-    trainer: "Dr. Neymar",
-    progress: "34%",
-    status: "Dropped",
+    courses: ["Basic Surgery", "Surgical Techniques"],
+    trainees: 28,
+    rating: 4.3,
+    status: ["On Leave", "Unavailable"],
   },
 ];
-const ActionIcons = [PencilIcon, BasketIcon, EyeIcon];
 
-const columnHelper = createColumnHelper<tData>();
+const columnHelper = createColumnHelper<tFData>();
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const columns: ColumnDef<tData, any>[] = [
-  columnHelper.accessor((row) => ({ name: row.name, email: row.email }), {
-    id: "traineeInfo",
-    header: "Trainee",
-    cell: (info) => (
-      <CellText
-        primary={info.getValue().name}
-        secondary={info.getValue().email}
-      />
-    ),
+const columns: ColumnDef<tFData, any>[] = [
+  columnHelper.accessor(
+    (row) => ({ name: row.name, experience: row.experience }),
+    {
+      id: "trainer",
+      header: "Trainer",
+      cell: (info) => (
+        <CellText
+          primary={info.getValue().name}
+          secondary={`${info.getValue().experience} years experience`}
+        />
+      ),
+    },
+  ),
+
+  columnHelper.accessor("specialty", {
+    header: "Specialty",
+    cell: (info) => <TextDecor input={info.getValue()} />,
   }),
 
   columnHelper.accessor("branch", {
     header: "Branch",
-    cell: (info) => <p className="text-gray-600">{info.getValue()}</p>,
-  }),
-  columnHelper.accessor(
-    (row) => ({ course: row.course, modules: row.modules }),
-    {
-      id: "courseInfo",
-      header: "Course",
-      cell: (info) => (
-        <CellText
-          primary={info.getValue().course}
-          secondary={info.getValue().modules}
-        />
-      ),
-    },
-  ),
-
-  columnHelper.accessor("trainer", {
-    header: "Trainer",
-    cell: (info) => <p>{info.getValue()}</p>,
+    cell: (info) => <p> {info.getValue()} </p>,
   }),
 
-  columnHelper.accessor(
-    (row) => ({ progress: row.progress, status: row.status }),
-    {
-      id: "progressStatus",
-      header: "Progress",
-      cell: (info) => (
-        <ProgressBar
-          progress={info.getValue().progress}
-          status={info.getValue().status}
-        />
-      ),
-    },
-  ),
+  columnHelper.accessor("courses", {
+    header: "Courses",
+    cell: (info) => (
+      <>
+        {info.getValue().map((course: string, index: number) => (
+          <p key={index} className="text-sm text-charcoal">
+            {course}
+          </p>
+        ))}
+      </>
+    ),
+  }),
+
+  columnHelper.accessor("trainees", {
+    header: "Trainees",
+    cell: (info) => <CellText primary={info.getValue()} secondary="active" />,
+  }),
+  columnHelper.accessor("rating", {
+    header: "Rating",
+    cell: (info) => <Rating rating={info.getValue()} />,
+  }),
 
   columnHelper.accessor("status", {
     header: "Status",
-    cell: (info) => <Status status={info.getValue()} />,
+    cell: (info) => (
+      <div className="flex">
+        {info.getValue()?.map((status: string, index: number) => (
+          <TextDecor key={index} input={status} />
+        ))}
+      </div>
+    ),
   }),
 
   columnHelper.display({
     id: "actions",
     header: "Actions",
-    cell: () => (
-      <div className="flex gap-2">
-        {ActionIcons.map((IconItem, i) => (
-          <IconItem key={i} className="w-5 h-5 cursor-pointer" />
-        ))}
-      </div>
-    ),
+    cell: () => <Actions />,
   }),
 ];
 function Trainers() {
   return (
     <div className="px-2 bg-gray-50 min-h-dvh">
-      <div className="flex justify-between px-2 py-9">
-        <div>
-          <h1 className="text-2xl">Medical Trainers</h1>
-          <p className="text-charcoal">
-            Manage professionals delivering medical training across your network
-          </p>
-        </div>
-        <button className="flex px-2 gap-2 items-center bg-teal-700 rounded-xl">
-          <img src={Plus} alt="plus" className="h-5 w-5" />
-          <p className="text-white font-medium text-sm ">Add Trainer</p>
-        </button>
-      </div>
+      <CommonHeading
+        title="Medical Trainers"
+        summary="Manage professionals delivering medical training across your network"
+        buttonText="Add Trainer"
+      />
       <StatBox data={medicalTrainers} />
-      <Table<tData>
+      <Table<tFData>
         title="Trainee Directory (4)"
-        tableData={traineesDirectory}
+        tableData={trainingFaculty}
         columns={columns}
       />
     </div>
